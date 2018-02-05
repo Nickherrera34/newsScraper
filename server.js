@@ -1,9 +1,29 @@
-// Students: Using this template, the cheerio documentation,
-// and what you've learned in class so far, scrape a website
-// of your choice, save information from the page in a result array, and log it to the console.
 
+// Dependencies
 var cheerio = require("cheerio");
 var request = require("request");
+var mongojs = require("mongojs");
+var bodyParser = require("body-parser");
+var express = require("express");
+var handlebars = require("express-handlebars");
+
+// Initialize Express
+var app = express();
+
+// Set up a static folder (public) for our web app
+app.use(express.static("public"));
+
+// Database configuration
+var databaseUrl = "dallasCowboys";
+var collections = "articles";
+
+// Use mongoj to hook the database to the db variable
+var db = mongojs(databaseUrl, collections);
+
+// log an error if any errors occur when mongodb is connected
+db.on("error", function(error){
+  console.log("Database Error:", error);
+})
 
 // Make a request call to grab the HTML body from the site of your choice
 request("http://www.dallascowboys.com/", function(error, response, html) {
