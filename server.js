@@ -15,7 +15,7 @@ app.use(express.static("public"));
 
 // Database configuration
 var databaseUrl = "dallasCowboys";
-var collections = "articles";
+var collections = ["articles"];
 
 // Use mongoj to hook the database to the db variable
 var db = mongojs(databaseUrl, collections);
@@ -28,7 +28,7 @@ db.on("error", function(error){
 // Make a request call to grab the HTML body from the site of your choice
 request("http://www.dallascowboys.com/", function(error, response, html) {
 
-  // Load the HTML into cheerio and save it to a variable
+  // Load the HTML into cheerio and save it to a variablecd ..
   // '$' becomes a shorthand for cheerio's selector commands, much like jQuery's '$'
   var $ = cheerio.load(html);
 
